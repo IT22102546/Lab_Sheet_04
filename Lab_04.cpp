@@ -3,10 +3,7 @@
 
 using namespace std;
 
-float RecArea(float length, float width);
-float SqrArea(float length);
-float CircleArea(float radius);
-float FenceCost(float &length, float &width);
+
 
 struct circle
 {
@@ -19,7 +16,7 @@ struct Rectangle
 	float length;
 	float width;
 	
-}rec1;
+}rec1,recOut;
 
 struct square
 {
@@ -27,14 +24,19 @@ struct square
 	
 }sqr1;
 
+float RecArea(Rectangle r);
+float SqrArea(square s);
+float CircleArea(circle c);
+float FenceCost(float &length, float &width);
+
 int main()
 {
-	float Carea,Rarea,Sarea,totobArea,length,width,	RemLarea, Larea,cost;
+	float Carea,Rarea,Sarea,totobArea,RemLarea, Larea,cost;
 	
 	cout<<"Enter radius of the cirle: ";
 	cin>>circle1.radius;
 	
-	Carea=CircleArea(circle1.radius);
+	Carea=CircleArea(circle1);
 	cout<<"Area Of the Circle : "<<setiosflags(ios::fixed)<<setprecision(3)<<Carea;
 	
 	cout<<endl;
@@ -45,7 +47,7 @@ int main()
 	cout<<"Enter Width of the Rectangle: ";
 	cin>>rec1.width;
 	
-	Rarea=RecArea(rec1.length,rec1.width);
+	Rarea=RecArea(rec1);
 	cout<<"Area Of the Rectangle : "<<setiosflags(ios::fixed)<<setprecision(3)<<Rarea;
 	
 	cout<<endl;
@@ -54,7 +56,7 @@ int main()
 	cout<<"Enter length of the Square: ";
 	cin>>sqr1.length;
 	
-	Sarea=SqrArea(sqr1.length);
+	Sarea=SqrArea(sqr1);
 	cout<<"Area Of the Square : "<<setiosflags(ios::fixed)<<setprecision(3)<<Sarea;
 	
 	cout<<endl;
@@ -63,11 +65,11 @@ int main()
 	totobArea=Sarea+Rarea+Carea;
 	
 	cout<<"Enter length of the Land: ";
-	cin>>length;
+	cin>>recOut.length;
 	cout<<"Enter Width of the Land: ";
-	cin>>width;
+	cin>>recOut.width;
 	
-	Larea=length*width;
+	Larea=RecArea(recOut);
 	
 	RemLarea=Larea-totobArea;
 	
@@ -75,33 +77,30 @@ int main()
 	cout<<"Area Of the Remaining Land : "<<setiosflags(ios::fixed)<<setprecision(3)<<RemLarea;
 	
 	cout<<endl;
-	cost=FenceCost(length,width);
+	cost=FenceCost(recOut.length,recOut.length);
 	cout<<"Price for Fence : Rs."<<setiosflags(ios::fixed)<<setprecision(3)<<cost;
 }
 
-float CircleArea(float radius)
+float CircleArea(circle C)
 {
-	float Carea;
-	
-	Carea=(22.0/7)*radius*radius;
-	
-	return Carea;
+	 float Carea=22.0/7*circle1.radius*circle1.radius;
+	  return Carea;
 }
 
-float RecArea(float length, float width)
+float RecArea(Rectangle r)
 {
 	float Rarea;
 	
-	Rarea=length*width;
+	Rarea=(r.length*r.width);
 	
 	return Rarea;
 }
 
-float SqrArea(float length)
+float SqrArea(square S)
 {
 	float Sarea;
 	
-	Sarea=length*length;
+	Sarea=sqr1.length*sqr1.length;
 	
 	return Sarea;
 }
